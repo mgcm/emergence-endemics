@@ -1,0 +1,36 @@
+<!doctype HTML>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+  </head>
+
+  <body style='margin : 0px; overflow: hidden;'>
+    <a-scene embedded arjs='debugUIEnabled: false; patternRatio: 0.70'>
+
+      <a-assets>
+        <img id="one-species" src="/assets/species/1/species.jpg">
+        <img id="one-text" src="/assets/species/1/text.jpg">
+
+        <img id="two-species" src="/assets/species/2/species.jpg">
+        <img id="two-text" src="/assets/species/2/text.jpg">
+      </a-assets>
+
+      <a-marker preset="custom" type="pattern" url="/assets/species/1/marker.patt">
+        <a-entity id="species-1">
+          <a-plane height="1" width="1" rotation="-90 0 0" material="shader: flat; src: #one-species"></a-plane>
+          <a-plane height="1" width="1" rotation="-90 0 0" position="1.1 0 0" material="src: #one-text;"></a-plane>
+        </a-entity>
+      </a-marker>
+
+      <a-marker preset="custom" type="pattern" url="/assets/species/2/marker.patt">
+        <a-entity id="species-2">
+          <a-plane height="1" width="1" rotation="-90 0 0" material="shader: flat; src: #two-species"></a-plane>
+          <a-plane height="1" width="1" rotation="-90 0 0" position="1.1 0 0" material="src: #two-text;"></a-plane>
+        </a-entity>
+      </a-marker>
+
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
