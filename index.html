@@ -107,6 +107,10 @@
 
         <img id="two-species" src="assets/species/2/species.jpg">
         <img id="two-text" src="assets/species/2/text.jpg">
+
+        <img id="three-species" src="assets/species/3/species.jpg">
+        <img id="three-text" src="assets/species/3/text.jpg">
+
       </a-assets>
 
       <a-marker preset="custom" type="pattern" url="assets/species/1/marker.patt">
@@ -120,6 +124,13 @@
         <a-entity id="species-2">
           <a-plane height="1" width="1" rotation="-90 0 0" material="shader: flat; src: #two-species"></a-plane>
           <a-plane height="1" width="1" rotation="-90 0 0" position="1.1 0 0" material="src: #two-text;"></a-plane>
+        </a-entity>
+      </a-marker>
+
+      <a-marker preset="custom" type="pattern" url="assets/species/3/marker.patt">
+        <a-entity id="species-3">
+          <a-plane height="1" width="1" rotation="-90 0 0" material="shader: flat; src: #three-species"></a-plane>
+          <a-plane height="1" width="1" rotation="-90 0 0" position="1.1 0 0" material="src: #three-text;"></a-plane>
         </a-entity>
       </a-marker>
 
