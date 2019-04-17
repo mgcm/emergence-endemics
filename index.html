@@ -1,136 +1,36 @@
 <!doctype HTML>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
 
   <body style='margin : 0px; overflow: hidden;'>
+    <a-scene embedded arjs='debugUIEnabled: false; patternRatio: 0.70' vr-mode-ui="enabled: false">
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <a-assets>
+        <img id="one-species" src="assets/species/1/species.jpg">
+        <img id="one-text" src="assets/species/1/text.jpg">
 
-    <style>
-      .footer {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        color: white;
-        height: 64px;
-        text-align: center;
-      }
-    </style>
+        <img id="two-species" src="assets/species/2/species.jpg">
+        <img id="two-text" src="assets/species/2/text.jpg">
+      </a-assets>
 
-    <script>
-      const s1 = {
-        id: 's1',
-        name: "Paínho-de-Monteiro",
-        image: ""
-      };
+      <a-marker preset="custom" type="pattern" url="assets/species/1/marker.patt">
+        <a-entity id="species-1">
+          <a-plane height="1" width="1" rotation="-90 0 0" material="shader: flat; src: #one-species"></a-plane>
+          <a-plane height="1" width="1" rotation="-90 0 0" position="1.1 0 0" material="src: #one-text;"></a-plane>
+        </a-entity>
+      </a-marker>
 
-      const s2 = {
-        id: 's2',
-        name: "Aranha Creche",
-        image: ""
-      };
+      <a-marker preset="custom" type="pattern" url="assets/species/2/marker.patt">
+        <a-entity id="species-2">
+          <a-plane height="1" width="1" rotation="-90 0 0" material="shader: flat; src: #two-species"></a-plane>
+          <a-plane height="1" width="1" rotation="-90 0 0" position="1.1 0 0" material="src: #two-text;"></a-plane>
+        </a-entity>
+      </a-marker>
 
-      const s3 = {
-        id: 's3',
-        name: "Priolo",
-        image: ""
-      };
-
-      const s4 = {
-        id: 's4',
-        name: "Morcego dos Açores",
-        image: ""
-      };
-
-      const s5 = {
-        id: 's5',
-        name: "Escaravelho Cavernícula",
-        image: ""
-      };
-
-      const species = [s1, s2, s3, s4, s5];
-
-      function renderAllSpecies() {
-        $("#species-div span").remove();
-        species.forEach(renderSpecie);
-      }
-
-      function renderSpecie(value, index, array) {
-        var badge = 'badge-dark';
-        var found = window.localStorage.getItem('found');
-        if (!found) {
-          found = [];
-        } else {
-          found = JSON.parse(found);
-        }
-
-        if (found.indexOf(value.id) > -1) {
-          badge = 'badge-success';
-        }
-        $("#species-div").append("<span class='badge " + badge + "' id='specie-" + value.id + "'>" + value.name + "</span>");
-      }
-
-      function resetSpecies() {
-        window.localStorage.clear();
-        renderAllSpecies();
-      }
-
-      function addSpecies(speciesId) {
-        var found = window.localStorage.getItem('found');
-        if (!found) {
-          found = [];
-        } else {
-          found = JSON.parse(found);
-        }
-        if (found.indexOf(speciesId) == -1) {
-          found.push(speciesId);
-          window.localStorage.setItem('found', JSON.stringify(found));
-        }
-        renderAllSpecies();
-      }
-
-    </script>
-
-    <!-- SCENE -->
-    <div class="vr-container">
-      <a-scene class="vr-background" embedded arjs='debugUIEnabled: false; patternRatio: 0.70' vr-mode-ui="enabled: false">
-
-        <a-assets>
-          <img id="one-species" src="assets/species/1/species.jpg">
-          <img id="one-text" src="assets/species/1/text.jpg">
-
-          <img id="two-species" src="assets/species/2/species.jpg">
-          <img id="two-text" src="assets/species/2/text.jpg">
-        </a-assets>
-
-        <a-marker preset="custom" type="pattern" url="assets/species/1/marker.patt">
-          <a-entity id="species-1">
-            <a-plane height="1" width="1" rotation="-90 0 0" material="shader: flat; src: #one-species"></a-plane>
-            <a-plane height="1" width="1" rotation="-90 0 0" position="1.1 0 0" material="src: #one-text;"></a-plane>
-          </a-entity>
-        </a-marker>
-
-        <a-marker preset="custom" type="pattern" url="assets/species/2/marker.patt">
-          <a-entity id="species-2">
-            <a-plane height="1" width="1" rotation="-90 0 0" material="shader: flat; src: #two-species"></a-plane>
-            <a-plane height="1" width="1" rotation="-90 0 0" position="1.1 0 0" material="src: #two-text;"></a-plane>
-          </a-entity>
-        </a-marker>
-
-        <a-entity camera></a-entity>
-      </a-scene>
-
-
-    </div>
+      <a-entity camera></a-entity>
+    </a-scene>
   </body>
 </html>
