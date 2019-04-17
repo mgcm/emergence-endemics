@@ -55,27 +55,27 @@
       });
 
       const sound1 = new Howl({
-        src: ['assets/species/1/sound.wav'],
+        src: ['assets/species/s1/sound.wav'],
         loop: true
       });
 
       const sound2 = new Howl({
-        src: ['assets/species/2/sound.wav'],
+        src: ['assets/species/s2/sound.wav'],
         loop: true
       });
 
       const sound3 = new Howl({
-        src: ['assets/species/3/sound.wav'],
+        src: ['assets/species/s3/sound.wav'],
         loop: true
       });
 
       const sound4 = new Howl({
-        src: ['assets/species/4/sound.wav'],
+        src: ['assets/species/s4/sound.wav'],
         loop: true
       });
 
       const sound5 = new Howl({
-        src: ['assets/species/5/sound.wav'],
+        src: ['assets/species/s5/sound.wav'],
         loop: true
       });
 
@@ -113,11 +113,12 @@
 
       function renderAllSpecies() {
         $("#species-div span").remove();
+        $("#species-div img").remove();
         species.forEach(renderSpecie);
       }
 
       function renderSpecie(value) {
-        var badge = 'badge-dark';
+        var image = 'assets/locked.jpg';
         var found = window.localStorage.getItem('found');
         if (!found) {
           found = [];
@@ -126,9 +127,9 @@
         }
 
         if (found.indexOf(value.id) > -1) {
-          badge = 'badge-success';
+          image = 'assets/species/' + value.id + '/species.jpg';
         }
-        $("#species-div").append("<span class='badge " + badge + "' id='specie-" + value.id + "'>" + value.name + "</span>");
+        $("#species-div").append("<img id='" + value.id + "' src='" + image + "' width='64px' height='64px' />");
       }
 
       function resetSpecies() {
@@ -183,51 +184,51 @@
     <a-scene class="vr-background" embedded arjs='debugUIEnabled: false; patternRatio: 0.70' vr-mode-ui="enabled: false">
 
       <a-assets>
-        <img id="one-species" src="assets/species/1/species.jpg">
-        <img id="one-text" src="assets/species/1/text.jpg">
+        <img id="one-species" src="assets/species/s1/species.jpg">
+        <img id="one-text" src="assets/species/s1/text.jpg">
 
-        <img id="two-species" src="assets/species/2/species.jpg">
-        <img id="two-text" src="assets/species/2/text.jpg">
+        <img id="two-species" src="assets/species/s2/species.jpg">
+        <img id="two-text" src="assets/species/s2/text.jpg">
 
-        <img id="three-species" src="assets/species/3/species.jpg">
-        <img id="three-text" src="assets/species/3/text.jpg">
+        <img id="three-species" src="assets/species/s3/species.jpg">
+        <img id="three-text" src="assets/species/s3/text.jpg">
 
-        <img id="four-species" src="assets/species/4/species.jpg">
-        <img id="four-text" src="assets/species/4/text.jpg">
+        <img id="four-species" src="assets/species/s4/species.jpg">
+        <img id="four-text" src="assets/species/s4/text.jpg">
 
-        <img id="five-species" src="assets/species/5/species.jpg">
-        <img id="five-text" src="assets/species/5/text.jpg">
+        <img id="five-species" src="assets/species/s5/species.jpg">
+        <img id="five-text" src="assets/species/s5/text.jpg">
       </a-assets>
 
-      <a-marker id="s1" preset="custom" type="pattern" url="assets/species/1/marker.patt" registerevents>
+      <a-marker id="s1" preset="custom" type="pattern" url="assets/species/s1/marker.patt" registerevents>
         <a-entity id="species-1">
           <a-plane height="1" width="1" rotation="-90 0 0" material="shader: flat; src: #one-species"></a-plane>
           <a-plane height="1" width="1" rotation="-90 0 0" position="1.1 0 0" material="src: #one-text;"></a-plane>
         </a-entity>
       </a-marker>
 
-      <a-marker id="s2" preset="custom" type="pattern" url="assets/species/2/marker.patt" registerevents>
+      <a-marker id="s2" preset="custom" type="pattern" url="assets/species/s2/marker.patt" registerevents>
         <a-entity id="species-2">
           <a-plane height="1" width="1" rotation="-90 0 0" material="shader: flat; src: #two-species"></a-plane>
           <a-plane height="1" width="1" rotation="-90 0 0" position="1.1 0 0" material="src: #two-text;"></a-plane>
         </a-entity>
       </a-marker>
 
-      <a-marker id="s3" preset="custom" type="pattern" url="assets/species/3/marker.patt" registerevents>
+      <a-marker id="s3" preset="custom" type="pattern" url="assets/species/s3/marker.patt" registerevents>
         <a-entity id="species-3">
           <a-plane height="1" width="1" rotation="-90 0 0" material="shader: flat; src: #three-species"></a-plane>
           <a-plane height="1" width="1" rotation="-90 0 0" position="1.1 0 0" material="src: #three-text;"></a-plane>
         </a-entity>
       </a-marker>
 
-      <a-marker id="s4" preset="custom" type="pattern" url="assets/species/4/marker.patt" registerevents>
+      <a-marker id="s4" preset="custom" type="pattern" url="assets/species/s4/marker.patt" registerevents>
         <a-entity id="species-4">
           <a-plane height="1" width="1" rotation="-90 0 0" material="shader: flat; src: #four-species"></a-plane>
           <a-plane height="1" width="1" rotation="-90 0 0" position="1.1 0 0" material="src: #four-text;"></a-plane>
         </a-entity>
       </a-marker>
 
-      <a-marker id="s5" preset="custom" type="pattern" url="assets/species/5/marker.patt" registerevents>
+      <a-marker id="s5" preset="custom" type="pattern" url="assets/species/s5/marker.patt" registerevents>
         <a-entity id="species-5">
           <a-plane height="1" width="1" rotation="-90 0 0" material="shader: flat; src: #five-species"></a-plane>
           <a-plane height="1" width="1" rotation="-90 0 0" position="1.1 0 0" material="src: #five-text;"></a-plane>
