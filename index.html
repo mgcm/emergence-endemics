@@ -1,11 +1,107 @@
 <!doctype HTML>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
 
   <body style='margin : 0px; overflow: hidden;'>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <style>
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        color: white;
+        height: 64px;
+        text-align: center;
+      }
+    </style>
+
+    <script>
+      const s1 = {
+        id: 's1',
+        name: "Paínho-de-Monteiro",
+        image: ""
+      };
+
+      const s2 = {
+        id: 's2',
+        name: "Aranha Creche",
+        image: ""
+      };
+
+      const s3 = {
+        id: 's3',
+        name: "Priolo",
+        image: ""
+      };
+
+      const s4 = {
+        id: 's4',
+        name: "Morcego dos Açores",
+        image: ""
+      };
+
+      const s5 = {
+        id: 's5',
+        name: "Escaravelho Cavernícula",
+        image: ""
+      };
+
+      const species = [s1, s2, s3, s4, s5];
+
+      function renderAllSpecies() {
+        $("#species-div span").remove();
+        species.forEach(renderSpecie);
+      }
+
+      function renderSpecie(value, index, array) {
+        var badge = 'badge-dark';
+        var found = window.localStorage.getItem('found');
+        if (!found) {
+          found = [];
+        } else {
+          found = JSON.parse(found);
+        }
+
+        if (found.indexOf(value.id) > -1) {
+          badge = 'badge-success';
+        }
+        $("#species-div").append("<span class='badge " + badge + "' id='specie-" + value.id + "'>" + value.name + "</span>");
+      }
+
+      function resetSpecies() {
+        window.localStorage.clear();
+        renderAllSpecies();
+      }
+
+      function addSpecies(speciesId) {
+        var found = window.localStorage.getItem('found');
+        if (!found) {
+          found = [];
+        } else {
+          found = JSON.parse(found);
+        }
+        if (found.indexOf(speciesId) == -1) {
+          found.push(speciesId);
+          window.localStorage.setItem('found', JSON.stringify(found));
+        }
+        renderAllSpecies();
+      }
+
+    </script>
+
+    <!-- SCENE -->
     <div class="vr-container">
       <a-scene class="vr-background" embedded arjs='debugUIEnabled: false; patternRatio: 0.70' vr-mode-ui="enabled: false">
 
@@ -33,9 +129,35 @@
 
         <a-entity camera></a-entity>
       </a-scene>
-      <div class="vr-overlay-content">
-          <button class="action">Get Started</button>
+
+      <!-- FOOTER -->
+      <div class="vr-overlay-content footer">
+        <div id="species-div">
+        </div>
+
+        <div>
+          <button tyoe="button" onclick="resetSpecies();">RESET GAME</button>
+          <button tyoe="button" onclick="addSpecies('s1');">TOGGLE S1</button>
+          <button tyoe="button" onclick="addSpecies('s2');">TOGGLE S2</button>
+          <button tyoe="button" onclick="addSpecies('s3');">TOGGLE S3</button>
+          <button tyoe="button" onclick="addSpecies('s4');">TOGGLE S4</button>
+          <button tyoe="button" onclick="addSpecies('s5');">TOGGLE S5</button>
+        </div>
+
+        <script>
+          $(document).ready(function() {
+
+            var found = window.localStorage.getItem('found');
+            if (!found) {
+              found = [];
+              window.localStorage.setItem(found, JSON.stringify(found));
+            }
+
+            renderAllSpecies();
+          });
+        </script>
+
       </div>
-  </div>
+    </div>
   </body>
 </html>
