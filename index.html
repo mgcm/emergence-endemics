@@ -17,6 +17,8 @@
         position: fixed;
         left: 1%;
         top: 1%;
+        height: 98%;
+        width: 98%;
         color: black;
         text-align: center;
       }
@@ -46,6 +48,7 @@
             marker.addEventListener('markerLost', function() {
               var markerId = marker.id;
               stopSound(markerId);
+              checkForWinner();
             });
 
           }
@@ -146,10 +149,6 @@
           window.localStorage.setItem('found', JSON.stringify(found));
         }
         renderAllSpecies();
-
-        if (found.length == 5) {
-          $('#winner-dialog').show();
-        }
       }
 
       function playSound(markerId) {
@@ -168,6 +167,17 @@
         });
       }
 
+      function checkForWinner() {
+        var found = window.localStorage.getItem('found');
+        if (!found) {
+          found = [];
+        } else {
+          found = JSON.parse(found);
+        }
+        if (found.length == 5) {
+          $('#winner-dialog').show();
+        }
+      }
     </script>
 
     <a-scene class="vr-background" embedded arjs='debugUIEnabled: false; patternRatio: 0.70' vr-mode-ui="enabled: false">
@@ -231,10 +241,11 @@
 
     <!-- WINNER PANEL -->
     <div class="vr-overlay-content header">
-      <div id="winner-dialog" class="card" style="width: 18rem; display:none;">
-        <img class="card-img-top" src="assets/species/5/marker.png">
+      <div id="winner-dialog" class="card" style="display: none;">
         <div class="card-body">
-          <p class="card-text">Encontras-te as espécies todas! Descobre mais espécies no Portal da Biodiversidade dos Açores.</p>
+          <p class="card-text"><strong>Completaste o desafio!</strong></p>
+          <img class="card-image" src="assets/trophy.jpg">
+          <p class="card-text">Descobre mais espécies no <a href="http://azoresbioportal.uac.pt/pt/">Portal da Biodiversidade dos Açores.</a></p>
           <button type="button" onclick="resetSpecies();">JOGAR NOVAMENTE</button>
         </div>
       </div>
