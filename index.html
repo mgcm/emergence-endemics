@@ -14,6 +14,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <style>
+      .header {
+        position: fixed;
+        left: 1%;
+        top: 1%;
+        color: black;
+        text-align: center;
+      }
+
       .footer {
         position: fixed;
         left: 0;
@@ -92,6 +100,7 @@
 
       function resetSpecies() {
         window.localStorage.clear();
+        $('#winner-dialog').hide();
         renderAllSpecies();
       }
 
@@ -107,6 +116,10 @@
           window.localStorage.setItem('found', JSON.stringify(found));
         }
         renderAllSpecies();
+
+        if (found.length == 5) {
+          $('#winner-dialog').show();
+        }
       }
 
     </script>
@@ -167,7 +180,20 @@
       </a-marker>
 
       <a-entity camera></a-entity>
+
     </a-scene>
+
+    <!-- WINNER PANEL -->
+    <div class="vr-overlay-content header">
+      <div id="winner-dialog" class="card" style="width: 18rem; display:none;">
+        <img class="card-img-top" src="assets/species/5/marker.png">
+        <div class="card-body">
+          <p class="card-text">Encontras-te as espécies todas! Descobre mais espécies no Portal da Biodiversidade dos Açores.</p>
+          <button type="button" onclick="resetSpecies();">JOGAR NOVAMENTE</button>
+        </div>
+      </div>
+    </div>
+
 
     <!-- FOOTER -->
     <div class="vr-overlay-content footer">
@@ -175,21 +201,21 @@
       </div>
 
       <div>
-        <button tyoe="button" onclick="resetSpecies();">RESET GAME</button>
+        <!-- <button tyoe="button" onclick="resetSpecies();">RESET GAME</button> -->
       </div>
-
-      <script>
-        $(document).ready(function() {
-          var found = window.localStorage.getItem('found');
-          if (!found) {
-            found = [];
-            window.localStorage.setItem(found, JSON.stringify(found));
-          }
-
-          renderAllSpecies();
-        });
-      </script>
-
     </div>
+
+    <script>
+      $(document).ready(function() {
+        var found = window.localStorage.getItem('found');
+        if (!found) {
+          found = [];
+          window.localStorage.setItem(found, JSON.stringify(found));
+        }
+
+        renderAllSpecies();
+      });
+    </script>
+
   </body>
 </html>
