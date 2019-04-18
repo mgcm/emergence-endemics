@@ -181,7 +181,11 @@
           found = JSON.parse(found);
         }
         if (found.length == 5) {
-          $('#winner-dialog').show();
+          if (language.startsWith('pt')) {
+            $('#winner-dialog-pt').show();
+          } else {
+            $('#winner-dialog').show();
+          }
           $('#species-div').hide();
         }
       }
@@ -248,6 +252,15 @@
     <!-- WINNER PANEL -->
     <div class="vr-overlay-content header">
       <div id="winner-dialog" class="card" style="display: none;">
+        <div class="card-body">
+          <p class="card-text"><strong>Challenge completed!</strong></p>
+          <img class="card-image" src="assets/trophy.png">
+          <p class="card-text">You can find more about other species at the <a href="http://azoresbioportal.uac.pt/pt/">Azores Biodiversity Portal.</a></p>
+          <button type="button" onclick="resetSpecies();">PLAY AGAIN</button>
+        </div>
+      </div>
+
+      <div id="winner-dialog-pt" class="card" style="display: none;">
         <div class="card-body">
           <p class="card-text"><strong>Completaste o desafio!</strong></p>
           <img class="card-image" src="assets/trophy.png">
