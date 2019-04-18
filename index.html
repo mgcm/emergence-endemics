@@ -135,6 +135,7 @@
       function resetSpecies() {
         window.localStorage.clear();
         $('#winner-dialog').hide();
+        $('#species-div').show();
         renderAllSpecies();
       }
 
@@ -177,6 +178,7 @@
         }
         if (found.length == 5) {
           $('#winner-dialog').show();
+          $('#species-div').hide();
         }
       }
     </script>
