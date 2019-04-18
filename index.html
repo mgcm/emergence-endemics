@@ -17,7 +17,7 @@
         position: fixed;
         left: 1%;
         top: 1%;
-        height: 98%;
+        height: 75%;
         width: 98%;
         color: black;
         text-align: center;
@@ -127,7 +127,7 @@
         }
 
         if (found.indexOf(value.id) > -1) {
-          image = 'assets/species/' + value.id + '/species.jpg';
+          image = 'assets/species/' + value.id + '/unlocked.jpg';
         }
         $("#species-div").append("<img id='" + value.id + "' src='" + image + "' width='64px' height='64px' />");
       }
@@ -223,15 +223,15 @@
 
       <a-marker id="s4" preset="custom" type="pattern" url="assets/species/s4/marker.patt" registerevents>
         <a-entity id="species-4">
-          <a-plane height="1.2" width="1" rotation="-90 0 0" material="shader: flat; src: #four-species"></a-plane>
-          <a-plane height="1.2" width="1" rotation="-90 0 0" position="1.25 0 0" material="src: #four-text;"></a-plane>
+          <a-plane height="1.2" width="1.2" rotation="-90 0 0" material="shader: flat; src: #four-species"></a-plane>
+          <a-plane height="1.2" width="1.2" rotation="-90 0 0" position="1.25 0 0" material="src: #four-text;"></a-plane>
         </a-entity>
       </a-marker>
 
       <a-marker id="s5" preset="custom" type="pattern" url="assets/species/s5/marker.patt" registerevents>
         <a-entity id="species-5">
-          <a-plane height="1.2" width="1" rotation="-90 0 0" material="shader: flat; src: #five-species"></a-plane>
-          <a-plane height="1.2" width="1" rotation="-90 0 0" position="1.25 0 0" material="src: #five-text;"></a-plane>
+          <a-plane height="1.2" width="1.2" rotation="-90 0 0" material="shader: flat; src: #five-species"></a-plane>
+          <a-plane height="1.2" width="1.2" rotation="-90 0 0" position="1.25 0 0" material="src: #five-text;"></a-plane>
         </a-entity>
       </a-marker>
 
@@ -244,7 +244,7 @@
       <div id="winner-dialog" class="card" style="display: none;">
         <div class="card-body">
           <p class="card-text"><strong>Completaste o desafio!</strong></p>
-          <img class="card-image" src="assets/trophy.jpg">
+          <img class="card-image" src="assets/trophy.png">
           <p class="card-text">Descobre mais espécies no <a href="http://azoresbioportal.uac.pt/pt/">Portal da Biodiversidade dos Açores.</a></p>
           <button type="button" onclick="resetSpecies();">JOGAR NOVAMENTE</button>
         </div>
