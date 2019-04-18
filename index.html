@@ -111,6 +111,10 @@
 
       const species = [s1, s2, s3, s4, s5];
 
+      var language = navigator.languages && navigator.languages[0] || // Chrome / Firefox
+               navigator.language ||   // All browsers
+               navigator.userLanguage; // IE <= 10
+
       function renderAllSpecies() {
         $("#species-div span").remove();
         $("#species-div img").remove();
@@ -185,21 +189,21 @@
 
     <a-scene class="vr-background" embedded arjs='debugUIEnabled: false; patternRatio: 0.70' vr-mode-ui="enabled: false">
 
-      <a-assets>
+      <a-assets id="species-assets">
         <img id="one-species" src="assets/species/s1/species.jpg">
-        <img id="one-text" src="assets/species/s1/text.jpg">
+        <img id="one-text" src="assets/species/s1/text-en.jpg">
 
         <img id="two-species" src="assets/species/s2/species.jpg">
-        <img id="two-text" src="assets/species/s2/text.jpg">
+        <img id="two-text" src="assets/species/s2/text-en.jpg">
 
         <img id="three-species" src="assets/species/s3/species.jpg">
-        <img id="three-text" src="assets/species/s3/text.jpg">
+        <img id="three-text" src="assets/species/s3/text-en.jpg">
 
         <img id="four-species" src="assets/species/s4/species.jpg">
-        <img id="four-text" src="assets/species/s4/text.jpg">
+        <img id="four-text" src="assets/species/s4/text-en.jpg">
 
         <img id="five-species" src="assets/species/s5/species.jpg">
-        <img id="five-text" src="assets/species/s5/text.jpg">
+        <img id="five-text" src="assets/species/s5/text-en.jpg">
       </a-assets>
 
       <a-marker id="s1" preset="custom" type="pattern" url="assets/species/s1/marker.patt" registerevents>
@@ -269,6 +273,14 @@
         if (!found) {
           found = [];
           window.localStorage.setItem(found, JSON.stringify(found));
+        }
+
+        if (language.startsWith('pt')) {
+          $('#one-text').attr('src', 'assets/species/s1/text.jpg');
+          $('#two-text').attr('src', 'assets/species/s2/text.jpg');
+          $('#three-text').attr('src', 'assets/species/s3/text.jpg');
+          $('#four-text').attr('src', 'assets/species/s4/text.jpg');
+          $('#five-text').attr('src', 'assets/species/s5/text.jpg');
         }
 
         renderAllSpecies();
